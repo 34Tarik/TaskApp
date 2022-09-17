@@ -1,3 +1,2 @@
 - Bu task'te hedeflenen dizayn'dan farklı olarak soldan açılır kapanır flyout menü tipi yerine sayfanın üst bölümünde kategoriler horizontal olarak sıralanıp     listelenmiştir.
 - ürünlerin ID bilgisi "_Id" propertysini convert edemediğim için JSON Convertor tahminimce düzgün çalışmadı. Dolayısıyla unique id için ID yerine Name propertysi üzerinden gerçekleştirdim. 
-- 
