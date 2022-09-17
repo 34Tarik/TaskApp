@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="TaskApp.Views.ProductPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:customviews="clr-namespace:TaskApp.Views.CustomViews"
+    xmlns:vm="clr-namespace:TaskApp.ViewModels">
+    <ContentPage.BindingContext>
+        <vm:ProductPageViewModel />
+    </ContentPage.BindingContext>
+    <Grid Padding="10" RowDefinitions="50,30,*,60">
+        <SearchBar
+            Grid.Row="0"
+            CancelButtonColor="Black"
+            SearchCommand="{Binding SearchCommand}"
+            Text="{Binding TextFilter}" />
+        <CollectionView
+            Grid.Row="1"
+            ItemsSource="{Binding Categories}"
+            SelectedItem="{Binding SelectedCategory, Mode=TwoWay}"
+            SelectionChangedCommand="{Binding CategorySelectedCommand}"
+            SelectionMode="Single">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout ItemSpacing="15" Orientation="Horizontal" />
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame
+                        Padding="10,0"
+                        BorderColor="Red"
+                        CornerRadius="10"
+                        HeightRequest="30">
+                        <Label
+                            HorizontalOptions="Center"
+                            Text="{Binding Name}"
+                            TextColor="Black"
+                            VerticalOptions="Center" />
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <CollectionView Grid.Row="2" ItemsSource="{Binding Products}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame BorderColor="Green">
+                        <StackLayout>
+                            <Label Text="{Binding Data.Title}" />
+                            <Label Text="{Binding Data.Category.Name}" />
+                            <Label Text="{Binding Data.Price}" />
+                            <Label Text="{Binding Data.UpdatedAt}" />
+                            <Label Text="{Binding Data.Slug}" />
+
+                            <Grid ColumnDefinitions="50,*,50">
+                                <Button
+                                    BindingContext="{Binding .}"
+                                    Clicked="Button_Clicked"
+                                    Grid.Column="0"
+                                    HeightRequest="40"
+                                    Text="+" />
+                                <Label 
+                                    HorizontalOptions="Center"
+                                    VerticalOptions="Center"
+                                    Grid.Column="1"
+                                    Text="{Binding Count}"/>
+
+                                <Button
+                                    BindingContext="{Binding .}"
+                                    Clicked="Button_Clicked_1"
+                                    Grid.Column="2"
+                                    HeightRequest="40"
+                                    Text="-"
+                                    />
+                            </Grid>
+
+                        </StackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <Grid Grid.Row="3" ColumnDefinitions="*,*">
+            <Button Grid.Column="0" Command="{Binding ClearFilterCommand}" Text="Filtreyi Temizle" />
+            <Button Grid.Column="1" Text="Sepete Git"  Command="{Binding GoToCartPageCommand}"/>
+        </Grid>
+
+    </Grid>
+
+</ContentPage>

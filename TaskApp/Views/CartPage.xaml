@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="TaskApp.Views.CartPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:TaskApp.ViewModels">
+    <ContentPage.BindingContext>
+        <vm:CartPageViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="{Binding PropertyName}" />
+            <CollectionView ItemsSource="{Binding Products}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame BorderColor="Green">
+                            <StackLayout>
+                                <Label Text="{Binding Data.Title}" />
+                                <Label Text="{Binding Data.Category.Name}" />
+                                <Label Text="{Binding Data.Price}" />
+                                <Label Text="{Binding Data.UpdatedAt}" />
+                                <Label Text="{Binding Data.Slug}" />
+                            </StackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
